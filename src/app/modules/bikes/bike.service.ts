@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { StatusFullError } from "../../../utilities/customError";
 
 export class BikeService {
     static async createBike(payload:any) {
@@ -19,6 +20,14 @@ export class BikeService {
             }
             
         })
+        if (!result) {
+            throw new StatusFullError(
+              "NotFoundError",
+              `Bike not found with this id: ${id}`,
+              false,
+              404
+            );
+        }
         return result;
     }
 }

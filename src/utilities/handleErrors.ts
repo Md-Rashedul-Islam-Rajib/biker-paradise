@@ -59,7 +59,7 @@ export const handleErrors: ErrorRequestHandler = (err, _req, res, _next) => {
       success: false,
       status: err.status,
       message: err.message || "Something went wrong",
-      stack: err.stack,
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
     });
   }
 
@@ -72,7 +72,7 @@ export const handleErrors: ErrorRequestHandler = (err, _req, res, _next) => {
       status: 400,
       message: "Something went wrong",
       error: err.message,
-      stack: err.stack,
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
     });
   }
 

@@ -10,8 +10,8 @@ ServiceRecordRoute.get(
   "/status",
   ServiceRecordController.getAllPendingServiceRecords
 );
-ServiceRecordRoute.get('/:id', ServiceRecordController.getSingleServiceRecord)
-ServiceRecordRoute.put('/:id/complete', ServiceRecordController.updateServiceRecord)
 
+ServiceRecordRoute.put('/:id/complete', ServiceRecordController.updateServiceRecord)
+ServiceRecordRoute.get("/:id", ServiceRecordController.getSingleServiceRecord);
 
 export default ServiceRecordRoute;

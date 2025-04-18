@@ -34,7 +34,8 @@ ServiceRecordController.getSingleServiceRecord = (0, catchAsync_1.default)((req,
     (0, sendResponse_1.default)(res, true, "Service record fetched successfully", undefined, result);
 }));
 ServiceRecordController.updateServiceRecord = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield bs_service_1.ServiceRecordService.updateServiceRecord(req.params.id, req.body.completionDate);
+    var _b, _c;
+    const result = yield bs_service_1.ServiceRecordService.updateServiceRecord((_b = req.params) === null || _b === void 0 ? void 0 : _b.id, (_c = req.body) === null || _c === void 0 ? void 0 : _c.completionDate);
     (0, sendResponse_1.default)(res, true, "Service marked as completed", undefined, result);
 }));
 ServiceRecordController.getAllPendingServiceRecords = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

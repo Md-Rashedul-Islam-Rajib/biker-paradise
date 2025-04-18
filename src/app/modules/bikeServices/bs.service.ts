@@ -7,7 +7,7 @@ export class ServiceRecordService {
         const result = await prisma.serviceRecord.create({
             data:payload
         })
-        // const result = await prisma.serviceRecord.createMany({
+        
         //   data: [
         //     {
         //     //   serviceId: "111",
@@ -64,7 +64,7 @@ export class ServiceRecordService {
         if (!result) {
           throw new StatusFullError(
             "NotFoundError",
-            "Service not found",
+            `Service not found with this id: ${id}`,
             false,
             404
           );
@@ -79,7 +79,12 @@ export class ServiceRecordService {
             }
         })
         if (!service) {
-            throw new StatusFullError("NotFoundError","Service not found",false,404)
+            throw new StatusFullError(
+              "NotFoundError",
+              `Service not found with this id: ${id}`,
+              false,
+              404
+            );
         }
         if (service.status === "done") {
             throw new StatusFullError("NotFoundError",'Service is already marked as completed',false,404)

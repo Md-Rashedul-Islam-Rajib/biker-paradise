@@ -20,7 +20,7 @@ export class ServiceRecordController {
     })
 
     static updateServiceRecord = catchAsync(async (req, res) => {
-        const result = await ServiceRecordService.updateServiceRecord(req.params.id, req.body.completionDate)
+        const result = await ServiceRecordService.updateServiceRecord(req.params?.id, req.body?.completionDate)
         sendResponse(res,true,"Service marked as completed",undefined,result)
     })
 

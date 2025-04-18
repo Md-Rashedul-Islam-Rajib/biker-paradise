@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BikeService = void 0;
 const client_1 = require("../../../prisma/client");
+const customError_1 = require("../../../utilities/customError");
 class BikeService {
     static createBike(payload) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -33,6 +34,9 @@ class BikeService {
                     bikeId: id
                 }
             });
+            if (!result) {
+                throw new customError_1.StatusFullError("NotFoundError", `Bike not found with this id: ${id}`, false, 404);
+            }
             return result;
         });
     }

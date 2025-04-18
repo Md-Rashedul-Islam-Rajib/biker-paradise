@@ -19,7 +19,6 @@ class ServiceRecordService {
             const result = yield client_1.prisma.serviceRecord.create({
                 data: payload
             });
-            // const result = await prisma.serviceRecord.createMany({
             //   data: [
             //     {
             //     //   serviceId: "111",
@@ -71,7 +70,7 @@ class ServiceRecordService {
                 }
             });
             if (!result) {
-                throw new customError_1.StatusFullError("NotFoundError", "Service not found", false, 404);
+                throw new customError_1.StatusFullError("NotFoundError", `Service not found with this id: ${id}`, false, 404);
             }
             return result;
         });
@@ -84,7 +83,7 @@ class ServiceRecordService {
                 }
             });
             if (!service) {
-                throw new customError_1.StatusFullError("NotFoundError", "Service not found", false, 404);
+                throw new customError_1.StatusFullError("NotFoundError", `Service not found with this id: ${id}`, false, 404);
             }
             if (service.status === "done") {
                 throw new customError_1.StatusFullError("NotFoundError", 'Service is already marked as completed', false, 404);

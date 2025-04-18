@@ -51,7 +51,7 @@ const handleErrors = (err, _req, res, _next) => {
             success: false,
             status: err.status,
             message: err.message || "Something went wrong",
-            stack: err.stack,
+            stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
         });
     }
     // handling all other errors except zod and mongoose
@@ -61,7 +61,7 @@ const handleErrors = (err, _req, res, _next) => {
             status: 400,
             message: "Something went wrong",
             error: err.message,
-            stack: err.stack,
+            stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
         });
     }
     // handling unknown errors

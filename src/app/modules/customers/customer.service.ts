@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { StatusFullError } from "../../../utilities/customError";
 
 
 
@@ -22,6 +23,19 @@ export class CustomerService {
     }
 
     static async getSingleCustomer(id: string) {
+        const customer = await prisma.customer.findUnique({
+          where: {
+            customerId: id,
+          },
+        });
+        if (!customer) {
+          throw new StatusFullError(
+            "NotFoundError",
+            `Customer not found with this id: ${id}`,
+            false,
+            404
+          );
+        }
         const result = await prisma.customer.findUnique({
             where: {
                 customerId: id,
@@ -32,6 +46,19 @@ export class CustomerService {
     }
 
     static async updateCustomer(id: string, payload: any) {
+        const customer = await prisma.customer.findUnique({
+            where: {
+                customerId: id
+            }
+        })
+        if(!customer){
+            throw new StatusFullError(
+              "NotFoundError",
+              `Customer not found with this id: ${id}`,
+              false,
+              404
+            );
+        }
         const result = await prisma.customer.update({
             where: {
                 customerId: id,
@@ -44,6 +71,19 @@ export class CustomerService {
 
 
     static async deleteCustomer(id: string) {
+        const customer = await prisma.customer.findUnique({
+          where: {
+            customerId: id,
+          },
+        });
+        if (!customer) {
+          throw new StatusFullError(
+            "NotFoundError",
+            `Customer not found with this id: ${id}`,
+            false,
+            404
+          );
+        }
         const result = await prisma.customer.update({
             where: {
                 customerId: id,
@@ -53,6 +93,7 @@ export class CustomerService {
                 isDeleted:true
             }
         })
+        
         return result;
     }
 
